@@ -35,6 +35,11 @@
             right: 20px;
             z-index: 9999; /* Đảm bảo toast hiển thị trên cùng */
         }
+
+        body{
+            padding: 0;
+            margin: 0
+        }
     </style>
 </head>
 <body>
@@ -62,11 +67,7 @@
             </div>
         </nav>
     </header>
-    <div class="container" style="margin-top: 73px;">
-        <main role="main" class="pb-3" style="height: calc(100vh - 57px - 76px)">
-            @RenderBody()
-        </main>
-    </div>
+    @RenderBody()
 
    @*  <div role="alert" aria-live="assertive" aria-atomic="true" class="toast toast--custom" data-autohide="true">
         <div class="toast-header">
@@ -84,18 +85,17 @@
     </footer> *@
     <script src="~/js/custom-ui.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    <style>
+        .navbar a {
+            color: #ccc !important
+        }
+
+        .active {
+            font-weight: bold;
+            color: white !important
+        }
+    </style>
 </body>
-
-<style>
-    .navbar a {
-        color: #ccc !important
-    }
-
-    .active {
-        font-weight: bold;
-        color: white !important
-    }
-</style>
 </html>
 
 

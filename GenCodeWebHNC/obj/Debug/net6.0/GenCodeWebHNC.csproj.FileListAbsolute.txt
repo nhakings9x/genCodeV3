@@ -65,3 +65,5 @@ C:\Users\Admin\Desktop\doc\GenCodeV3\genCodeV3\GenCodeWebHNC\obj\Debug\net6.0\sc
 C:\Users\Admin\Desktop\doc\GenCodeV3\genCodeV3\GenCodeWebHNC\obj\Debug\net6.0\GenCodeWebHNC.csproj.CopyComplete
 C:\Users\Admin\Desktop\doc\GenCodeV3\genCodeV3\GenCodeWebHNC\obj\Debug\net6.0\GenCodeWebHNC.genruntimeconfig.cache
 C:\Users\Admin\Desktop\doc\GenCodeV3\genCodeV3\GenCodeWebHNC\obj\Debug\net6.0\ref\GenCodeWebHNC.dll
+C:\Users\Admin\Desktop\doc\GenCodeV3\genCodeV3\GenCodeWebHNC\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.Custom.cshtml.rz.scp.css
+C:\Users\Admin\Desktop\doc\GenCodeV3\genCodeV3\GenCodeWebHNC\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.Ts.cshtml.rz.scp.css

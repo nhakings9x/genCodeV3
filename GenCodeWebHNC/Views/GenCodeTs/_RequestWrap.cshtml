@@ -1,0 +1,56 @@
+﻿
+
+
+<div id="request-wrap" style="position: absolute; top: 0; left: 0; right: 0">
+    <div>
+        <div id="request-content-wrap" class="w-100" style="height: 80vh; background: #ccc; width: 100%;"></div>
+        <div id="request-content" style="position: absolute; top: 100%; right: 150px;">
+            <div class="triangle-container" onclick="toggleRequestWrap()">
+                <div class="triangle-down"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleRequestWrap() {
+        $("#request-content-wrap").toggleClass("h-0")
+    }
+</script>
+
+<style>
+    #request-content-wrap{
+        transition: height 0.5s ease;
+    }
+    .h-0 {
+        height: 16px !important;
+    }
+
+    .triangle-container {
+        position: relative;
+        cursor: pointer;
+        width: 0;
+        height: 0;
+    }
+
+    .triangle-down {
+        width: 0;
+        height: 0;
+        border-left: 30px solid transparent;
+        border-right: 30px solid transparent;
+        border-top: 30px solid #007bff;
+        position: relative;
+    }
+
+        .triangle-down::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px; /* Same as the width of the triangle base */
+            height: 30px; /* Same as the height of the triangle */
+            background-color: #007bff;
+            border-radius: 0 0 50% 50%;
+        }
+</style>

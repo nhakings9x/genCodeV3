@@ -22,6 +22,14 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VuQ29kZVRzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Admin/Desktop/doc/GenCodeV3/genCodeV3/GenCodeWebHNC/Views/GenCodeTs/_RequestWrap.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VuQ29kZVRzXF9SZXF1ZXN0V3JhcC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Admin/Desktop/doc/GenCodeV3/genCodeV3/GenCodeWebHNC/Views/GenCodeTs/_ResponseWrap.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VuQ29kZVRzXF9SZXNwb25zZVdyYXAuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Admin/Desktop/doc/GenCodeV3/genCodeV3/GenCodeWebHNC/Views/GenCodeV3/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VuQ29kZVYzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -57,3 +65,11 @@ build_metadata.AdditionalFiles.CssScope =
 [C:/Users/Admin/Desktop/doc/GenCodeV3/genCodeV3/GenCodeWebHNC/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-daijdxdj0p
+
+[C:/Users/Admin/Desktop/doc/GenCodeV3/genCodeV3/GenCodeWebHNC/Views/Shared/_Layout.Custom.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuQ3VzdG9tLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = b-o2rp58rb6t
+
+[C:/Users/Admin/Desktop/doc/GenCodeV3/genCodeV3/GenCodeWebHNC/Views/Shared/_Layout.Ts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuVHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-s0jvmp5g6v

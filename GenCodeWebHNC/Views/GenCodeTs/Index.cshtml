@@ -1,4 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Gen Code V3";
+    Layout = "_Layout.Ts";
 }
-abc
+
+@await Html.PartialAsync("_RequestWrap")
+@await Html.PartialAsync("_ResponseWrap")
