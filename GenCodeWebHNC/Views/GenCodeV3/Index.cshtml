@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "Gen Code V3";
+}
+
+<div class="row h-100">
+    <div class="col-6">
+        <div class="w-100 d-flex align-items-center justify-content-between mb-2">
+            <button id="btn-get-code" class="btn btn-success">Get Code</button>
+            <select id="type-get-code" class="form-select " style="width: 350px; height: 38px; padding: 4px 8px; font-weight: 500">
+                <option value="@((int)GenCodeType.CSharpToTS)">Model C# to TS</option>
+                <option value="@((int)GenCodeType.ModelTsToClumnGrid)">Model TS to column grid</option>
+                <option value="@((int)GenCodeType.CSharpToListString)">Model Language Key C# to List string</option>
+                <option value="@((int)GenCodeType.ModelLanguageCSharpToTs)">Model Language Key C# to TS</option>
+                <option value="@((int)GenCodeType.BeautifyText)">Beautify Text</option>
+                <option value="@((int)GenCodeType.Translate)">Google dịch (nvarchar = 500)</option>
+            </select>
+        </div>
+        <textarea id="content-c-sharp" class="form-control w-100 h-100"> </textarea>
+    </div>
+    <div class="col-6">
+        <button id="btn-copy-code-ts" class="btn btn-success mb-2">Copy</button>
+        <textarea id="res-ts-code" class="form-control w-100 h-100" readonly style="background: #f5f5f5"> </textarea>
+    </div>
+</div>
+
+<script>
+    $("#btn-get-code").on("click", function(){
+        $("#res-ts-code").val("")
+        var cSharpCode = $("#content-c-sharp").val().trim();
+        var type = $("#type-get-code").val()
+        if (cSharpCode.trim() == ""){
+            // alert("Chưa điền nội dung code C#")
+            onShowToast("Chưa điền nội dung code C#")
+            return
+        }
+        $.ajax({
+            url: "GenCodeV3/GenCode",
+            method: "POST",
+            data: {
+                @(nameof(GenCodeV3RequestModel.Type)): type,
+                @(nameof(GenCodeV3RequestModel.CodeContent)): cSharpCode
+            },
+            success:(res) => {
+                $("#res-ts-code").val(res)
+            },
+            error: (err) =>{
+                onShowToast(err)
+                console.log(err)
+            }
+        })
+    })
+
+    $("#btn-copy-code-ts").on("click", function(){
+        var textToCopy = document.getElementById('res-ts-code').value;
+
+        // Create a temporary textarea element
+        var tempTextarea = document.createElement('textarea');
+        tempTextarea.value = textToCopy;
+        document.body.appendChild(tempTextarea);
+
+        // Select the text
+        tempTextarea.select();
+        tempTextarea.setSelectionRange(0, 99999); // For mobile devices
+
+        // Copy the text to clipboard
+        document.execCommand('copy');
+
+        // Remove the temporary textarea element
+        document.body.removeChild(tempTextarea);
+
+        // Optionally, provide feedback to the user
+        // alert('Đã copy');
+        onShowToast("Đã copy")
+    })
+</script>

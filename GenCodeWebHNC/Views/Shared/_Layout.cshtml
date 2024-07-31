@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="icon" href="~/img/11zon_cropped.png" type="image/x-icon">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/GenCodeWebHNC.styles.css" asp-append-version="true" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <style>
+        /* .toast-container {
+            overflow: hidden;
+            max-width: 300px; 
+            transition: transform 0.5s ease-out; 
+            transform: translateX(100%);
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        } */
+
+        /* .toast--custom{
+            position: fixed;
+            top: 80px;
+            right: 46px;
+        } */
+
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999; /* Đảm bảo toast hiển thị trên cùng */
+        }
+    </style>
+</head>
+<body>
+    <header style=" position: fixed; width: 100%; top: 0; left: 0; ">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/img/11zon_cropped.png" style="width: 32px" /></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="GenCodeV3" asp-action="Index">Gen Code V3</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="TaiKhoanNganHangTest">Tài khoản ngân hàng Test</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container" style="margin-top: 73px;">
+        <main role="main" class="pb-3" style="height: calc(100vh - 57px - 76px)">
+            @RenderBody()
+        </main>
+    </div>
+
+   @*  <div role="alert" aria-live="assertive" aria-atomic="true" class="toast toast--custom" data-autohide="true">
+        <div class="toast-header">
+            <strong id="toast--title" class="mr-auto ">Bootstrap</strong>
+        </div>
+        <div id="toast--content" class="toast-body">
+            Hello, world! This is a toast message.
+        </div>
+    </div> *@
+    <div class="toast-container"></div>
+    @* <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - GenCodeWebHNC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer> *@
+    <script src="~/js/custom-ui.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+<style>
+    .navbar a {
+        color: #ccc !important
+    }
+
+    .active {
+        font-weight: bold;
+        color: white !important
+    }
+</style>
+</html>
+
+
