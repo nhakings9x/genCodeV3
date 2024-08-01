@@ -2,18 +2,100 @@
 
 
 <div id="response-wrap" style="display: flex; height: calc(100vh - 60px);">
-    <div class="left-response" style=" height: 100%; width: 200px; padding: 16px;">
-        
+    <div class="left-response" style=" height: 100%; width: 400px;">
+        <div class="folder-structure">
+            <ul class="tree">
+                <li>
+                    <span class="folder">Parent Folder</span>
+                    <ul>
+                        <li>
+                            <span class="folder">Forms</span>
+                            <ul>
+                                <li><span class="file">File 1.1</span></li>
+                                <li><span class="file">File 1.2</span></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="folder">Models</span>
+                            <ul>
+                                <li><span class="file">File 2.1</span></li>
+                            </ul>
+                        </li>
+                        <li><span class="file">SupermarketCheckinService</span></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
     </div>
 
     <div class="right-response" style="flex: 1; height: 100%; background: #ebebeb; padding: 32px;">
         <div style="display: flex; flex-direction: column; height: 100%">
-            <div class="toolbar-right" style="display: flex; justify-content: end; padding: 16px">
+            <div class="toolbar-right" style="display: flex; justify-content: start; padding: 16px">
                 <button class="btn btn-success">Copy</button>
             </div>
             <div class="content-right-text" style="flex: 1">
-                <textarea class="form-control w-100 h-100"></textarea>
+                <textarea class="form-control w-100 h-100" readonly></textarea>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const files = document.querySelectorAll('.tree .file');
+
+        files.forEach(file => {
+            file.addEventListener('dblclick', () => {
+                // Remove 'active' class from all files
+                files.forEach(f => f.classList.remove('active'));
+                // Add 'active' class to the clicked file
+                file.classList.add('active');
+            });
+        });
+    });
+</script>
+
+<style>
+    .folder-structure {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Styles for the tree class */
+    .tree {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+        .tree .folder, .tree .file {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+            .tree .folder::before {
+                content: '📁';
+                margin-right: 5px;
+            }
+
+            .tree .file::before {
+                content: '📄';
+                margin-right: 5px;
+            }
+
+        .tree ul {
+            margin-left: 20px;
+            border-left: 1px solid #ccc;
+            padding-left: 10px;
+        }
+
+        .tree .file.active {
+            background-color: #007bff;
+            color: white;
+            border-radius: 3px;
+            padding: 2px 5px;
+        }
+</style>

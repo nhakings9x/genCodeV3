@@ -3,7 +3,36 @@
 
 <div id="request-wrap" style="position: absolute; top: 0; left: 0; right: 0">
     <div>
-        <div id="request-content-wrap" class="w-100" style="height: 80vh; background: #ccc; width: 100%;"></div>
+        <div id="request-content-wrap" class="w-100 h-0" style="height: 80vh; background: #a39c9c; width: 100%;">
+            <div class="container h-100">
+                <div id="input-wrap" class=" row w-100 h-100 p-4 d-none">
+                    <div class="col-4 h-90" style="display: flex; justify-content: end; flex-direction: column">
+                        <div class="toolbar-right" style="padding-bottom: 16px">
+                            <b style="font-size: 24px;">Model Index</b>
+                        </div>
+                        <textarea class="form-control w-100 h-100" style="flex: 1"></textarea>
+                    </div>
+
+                    <div class="col-4 h-90" style="display: flex; justify-content: end; flex-direction: column">
+                        <div class="toolbar-right" style="padding-bottom: 16px">
+                            <b style="font-size: 24px;">Model Form</b>
+                        </div>
+                        <textarea class="form-control w-100 h-100" style="flex: 1"></textarea>
+                    </div>
+
+                    <div class="col-4 h-90" style="display: flex; justify-content: end; flex-direction: column">
+                        <div class="toolbar-right" style="padding-bottom: 16px">
+                            <b style="font-size: 24px;">Model Option</b>
+                        </div>
+                        <textarea class="form-control w-100 h-100" style="flex: 1"></textarea>
+                    </div>
+                    <div class="w-100">
+                        <button class="btn btn-success" style="float: right" onclick="toggleRequestWrap()">Gen Code</button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
         <div id="request-content" style="position: absolute; top: 100%; right: 150px;">
             <div class="triangle-container" onclick="toggleRequestWrap()">
                 <div class="triangle-down"></div>
@@ -15,6 +44,7 @@
 <script>
     function toggleRequestWrap() {
         $("#request-content-wrap").toggleClass("h-0")
+        $("#input-wrap").toggleClass("d-none")
     }
 </script>
 
@@ -22,6 +52,11 @@
     #request-content-wrap{
         transition: height 0.5s ease;
     }
+
+    .h-90 {
+        height: 90% !important;
+    }
+
     .h-0 {
         height: 16px !important;
     }
