@@ -5,7 +5,12 @@ namespace GenCodeWebHNC.Common
 {
     public static class StringExtensions
     {
-        public static string GetFileName(this string csharpClass)
+        public static string MyReplace(this string str, string oldValue, string newValue) {
+            str = str.Replace(oldValue, newValue);
+            return str;
+        }
+
+        public static string GetFileName(this string csharpClass, string fileType = ".ts")
         {
             string className = string.Empty;
 
@@ -22,7 +27,7 @@ namespace GenCodeWebHNC.Common
                     }
                 }
             }
-            return string.IsNullOrEmpty(className) ? "" : className + ".ts";
+            return string.IsNullOrEmpty(className) ? "" : className + fileType;
         }
 
         public static string ToTsModel(this string csharpClass)

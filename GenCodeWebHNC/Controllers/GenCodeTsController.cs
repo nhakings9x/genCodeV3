@@ -1,13 +1,17 @@
 ﻿using GenCodeWebHNC.Common;
 using GenCodeWebHNC.Models;
+using GenCodeWebHNC.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GenCodeWebHNC.Controllers
 {
     public class GenCodeTsController : Controller
     {
+        private readonly GenCodeTsService _serivce;
+
         public GenCodeTsController()
         {
+            _serivce = new GenCodeTsService();
         }
 
         public IActionResult Index()
@@ -20,6 +24,15 @@ namespace GenCodeWebHNC.Controllers
         {
             var res = new GenCodeTsResponse();
             res.ListFileModel = GenModelFileFolder(req);
+
+            res.ListFileForm = GenIndexFileFolder(req);
+            return res;
+        }
+
+        private List<GenCodeTsFileResponse> GenIndexFileFolder(GenCodeTsRequest req)
+        {
+            List<GenCodeTsFileResponse> res = _serivce.GenIndexFileFolder(req);
+
             return res;
         }
 

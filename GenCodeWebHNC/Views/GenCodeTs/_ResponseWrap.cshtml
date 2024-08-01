@@ -52,16 +52,20 @@
         $(clickedFile).addClass('active');
 
         var fileName = $(clickedFile).data("file-name");
-        var fileInfo;
-        try {
-            fileInfo = responseGolbal.listFileModel?.find(x => x.fileName === fileName);
-        } catch (error) {
-            console.error("An error occurred:", error);
-        }
-        var content = fileInfo ? fileInfo.content : "";
+        var content = findContentByFileName(responseGolbal, fileName)
 
         showContentVal(content);
     });
+
+    function findContentByFileName(data, fileName) {
+        for (let key in data) {
+            let found = data[key].find(item => item.fileName === fileName);
+            if (found) {
+                return found.content;
+            }
+        }
+        return null;
+    }
 
     function activeFileResFirst(){
         const files = document.querySelectorAll('.tree .file');
