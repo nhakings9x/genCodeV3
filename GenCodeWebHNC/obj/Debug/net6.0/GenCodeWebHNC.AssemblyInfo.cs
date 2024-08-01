@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GenCodeWebHNC")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+86bc5254690fcf775552e47debf960d13ac42ab5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+34f4f63793ca26ffd5488ebeb187617e7ee2aa1c")]
 [assembly: System.Reflection.AssemblyProductAttribute("GenCodeWebHNC")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GenCodeWebHNC")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

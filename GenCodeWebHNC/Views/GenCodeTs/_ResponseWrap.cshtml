@@ -10,18 +10,18 @@
                     <ul>
                         <li>
                             <span class="folder">Forms</span>
-                            <ul>
+                            <ul id="forms-file-wrap">
                                 <li><span class="file">File 1.1</span></li>
                                 <li><span class="file">File 1.2</span></li>
                             </ul>
                         </li>
                         <li>
                             <span class="folder">Models</span>
-                            <ul>
+                            <ul id="model-file-wrap">
                                 <li><span class="file">File 2.1</span></li>
                             </ul>
                         </li>
-                        <li><span class="file">SupermarketCheckinService</span></li>
+                        <li><span class="file">Service</span></li>
                     </ul>
                 </li>
             </ul>
@@ -31,28 +31,82 @@
     <div class="right-response" style="flex: 1; height: 100%; background: #ebebeb; padding: 32px;">
         <div style="display: flex; flex-direction: column; height: 100%">
             <div class="toolbar-right" style="display: flex; justify-content: start; padding: 16px">
-                <button class="btn btn-success">Copy</button>
+                <button id="btn-copy-code-ts" class="btn btn-success">Copy</button>
             </div>
             <div class="content-right-text" style="flex: 1">
-                <textarea class="form-control w-100 h-100" readonly></textarea>
+                <textarea id="file-content" class="form-control w-100 h-100" readonly></textarea>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const files = document.querySelectorAll('.tree .file');
+    $(document).on("dblclick", ".tree .file", function () {
+        // Lấy phần tử được nhấp đúp
+        const clickedFile = this;
 
-        files.forEach(file => {
-            file.addEventListener('dblclick', () => {
-                // Remove 'active' class from all files
-                files.forEach(f => f.classList.remove('active'));
-                // Add 'active' class to the clicked file
-                file.classList.add('active');
-            });
-        });
+        // Xóa lớp 'active' từ tất cả các tệp
+        $('.tree .file').removeClass('active');
+
+        // Thêm lớp 'active' vào tệp được nhấp đúp
+        $(clickedFile).addClass('active');
+
+        var fileName = $(clickedFile).data("file-name");
+        var fileInfo;
+        try {
+            fileInfo = responseGolbal.listFileModel?.find(x => x.fileName === fileName);
+        } catch (error) {
+            console.error("An error occurred:", error);
+        }
+        var content = fileInfo ? fileInfo.content : "";
+
+        showContentVal(content);
     });
+
+    function activeFileResFirst(){
+        const files = document.querySelectorAll('.tree .file');
+        if (files) {
+            $(files[0]).addClass('active')
+            $(files[0]).trigger("dblclick")
+        }
+    }
+
+    function showContentVal(content){
+        $("#file-content").val("")
+        if (content == ""){
+            $("#file-content").val("Không có dữ liệu.")
+            return
+        }
+        $("#file-content").val(content)
+    }
+
+    function cleanTreeFile(){
+        $("#forms-file-wrap").empty()
+        $("#model-file-wrap").empty()
+    }
+    
+    $("#btn-copy-code-ts").on("click", function () {
+        var textToCopy = document.getElementById('file-content').value;
+
+        // Create a temporary textarea element
+        var tempTextarea = document.createElement('textarea');
+        tempTextarea.value = textToCopy;
+        document.body.appendChild(tempTextarea);
+
+        // Select the text
+        tempTextarea.select();
+        tempTextarea.setSelectionRange(0, 99999); // For mobile devices
+
+        // Copy the text to clipboard
+        document.execCommand('copy');
+
+        // Remove the temporary textarea element
+        document.body.removeChild(tempTextarea);
+
+        // Optionally, provide feedback to the user
+        // alert('Đã copy');
+        onShowToast("Đã copy")
+    })
 </script>
 
 <style>

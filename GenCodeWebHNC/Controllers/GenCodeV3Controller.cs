@@ -1,3 +1,4 @@
+using GenCodeWebHNC.Common;
 using GenCodeWebHNC.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
@@ -31,7 +32,8 @@ namespace GenCodeWebHNC.Controllers
             {
                 try
                 {
-                    content = ConvertToTypeScriptInterface(req.CodeContent);
+                    //content = ConvertToTypeScriptInterface(req.CodeContent);
+                    content = req.CodeContent.ToTsModel();
                     content = content?.Trim() != "" ? content : msg;
                     return content;
                 }
