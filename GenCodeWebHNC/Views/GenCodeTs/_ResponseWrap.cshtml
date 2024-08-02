@@ -1,27 +1,37 @@
 ﻿
 
 
-<div id="response-wrap" style="display: flex; height: calc(100vh - 60px);">
-    <div class="left-response" style=" height: 100%; width: 400px;">
+<div id="response-wrap" style="display: flex; height: calc(100vh - 60px); font-size: 14px">
+    <div class="left-response" style=" height: 100%; width: 450px">
         <div class="folder-structure">
             <ul class="tree">
                 <li>
                     <span class="folder">Parent Folder</span>
-                    <ul>
+                    <ul id="parent-folder">
                         <li>
                             <span class="folder">Forms</span>
                             <ul id="forms-file-wrap">
-                                <li><span class="file">File 1.1</span></li>
-                                <li><span class="file">File 1.2</span></li>
+                                @* <li><span class="file">File 1.1</span></li>
+                                <li><span class="file">File 1.2</span></li> *@
                             </ul>
                         </li>
                         <li>
                             <span class="folder">Models</span>
                             <ul id="model-file-wrap">
-                                <li><span class="file">File 2.1</span></li>
+                                @* <li><span class="file">File 2.1</span></li> *@
                             </ul>
                         </li>
-                        <li><span class="file">Service</span></li>
+                    </ul>
+                </li>
+                <li>
+                    <span class="folder">Views</span>
+                    <ul>
+                        <li>
+                            <span class="folder">Forms</span>
+                            <ul>
+                                <li><span class="file" data-file-name="index.cshtml">index.cshtml</span></li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -100,6 +110,7 @@
     function cleanTreeFile(){
         $("#forms-file-wrap").empty()
         $("#model-file-wrap").empty()
+        $(".file-service").remove()
     }
     
     $("#btn-copy-code-ts").on("click", function () {

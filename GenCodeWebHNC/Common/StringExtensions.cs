@@ -234,5 +234,34 @@ namespace GenCodeWebHNC.Common
             return codeBuilder.ToString();
         }
         #endregion
+
+        #region View Index extension
+        public static string GenerateFormDataCode(this string cSharpModel)
+        {
+            var tsModel = cSharpModel.ToTsModel();
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("\n\t\t{");
+
+            // Extract the properties
+            var matches = Regex.Matches(tsModel, @"\s+(\w+):\s+\w+;");
+
+            foreach (Match match in matches)
+            {
+                string propertyName = match.Groups[1].Value;
+                sb.AppendLine($"\t\t\t{propertyName}: ...,");
+            }
+
+            // Remove the last comma
+            if (matches.Count > 0)
+            {
+                sb.Length -= 3;  // Remove the last comma and newline
+                sb.AppendLine();
+            }
+
+            sb.AppendLine("\t\t}");
+
+            return sb.ToString();
+        }
+        #endregion
     }
 }

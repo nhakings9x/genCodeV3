@@ -25,13 +25,11 @@ namespace GenCodeWebHNC.Controllers
             var res = new GenCodeTsResponse();
             res.ListFileModel = GenModelFileFolder(req);
 
-            res.ListFileForm = GenIndexFileFolder(req);
-            return res;
-        }
+            res.ListFileForm = _serivce.GenIndexFileFolder(req);
 
-        private List<GenCodeTsFileResponse> GenIndexFileFolder(GenCodeTsRequest req)
-        {
-            List<GenCodeTsFileResponse> res = _serivce.GenIndexFileFolder(req);
+            res.ListFileService = new List<GenCodeTsFileResponse> { _serivce.GenServiceFile(req.IndexModel) };
+
+            res.FileViewIndex = new List<GenCodeTsFileResponse> { _serivce.GenIndexViewFile(req) };
 
             return res;
         }

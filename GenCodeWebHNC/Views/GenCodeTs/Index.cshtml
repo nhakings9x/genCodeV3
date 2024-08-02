@@ -27,24 +27,25 @@
             url: "GenCodeTs/GenCode",
             method: "POST",
             data: {
-    @(nameof(GenCodeTsRequest.IndexModel)): indexModel,
-    @(nameof(GenCodeTsRequest.FormModel)): formModel,
-    @(nameof(GenCodeTsRequest.OptionModel)): optionModel
-                },
-    success: (res) => {
-        responseGolbal = res
-        genFormsModel(res.listFileForm)
-        genFileModel(res.listFileModel)
-        toggleRequestWrap()
-        activeFileResFirst()
-    },
-        error: (err) => {
-            onShowToast(err)
-            console.log(err)
-        }
-            })
-        }
-    // <li><span class="file" > File 1.1 < /span></li >
+                @(nameof(GenCodeTsRequest.IndexModel)): indexModel,
+                @(nameof(GenCodeTsRequest.FormModel)): formModel,
+                @(nameof(GenCodeTsRequest.OptionModel)): optionModel
+            },
+            success: (res) => {
+                responseGolbal = res
+                genFormsModel(res.listFileForm)
+                genFileModel(res.listFileModel)
+                genServiceModel(res.listFileService)
+                toggleRequestWrap()
+                activeFileResFirst()
+            },
+            error: (err) => {
+                onShowToast(err)
+                console.log(err)
+            }
+        })
+    }
+
     function genFileModel(listFileModel) {
         if (listFileModel) {
             listFileModel.forEach(x => {
@@ -57,6 +58,14 @@
         if (listFileModel) {
             listFileModel.forEach(x => {
                 $("#forms-file-wrap").append(`<li><span class="file" data-file-name="${x.fileName}"> ${x.fileName} </span></li >`)
+            })
+        }
+    }
+
+    function genServiceModel(listFileService){
+        if (listFileService) {
+            listFileService.forEach(x => {
+                $("#parent-folder").append(`<li class="file-service"><span class="file" data-file-name="${x.fileName}"> ${x.fileName} </span></li >`)
             })
         }
     }

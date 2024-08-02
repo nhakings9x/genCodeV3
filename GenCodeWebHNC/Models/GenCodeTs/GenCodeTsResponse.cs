@@ -7,6 +7,8 @@
         public List<GenCodeTsFileResponse> ListFileModel { get; set; }
 
         public List<GenCodeTsFileResponse> ListFileService { get; set; }
+
+        public List<GenCodeTsFileResponse> FileViewIndex { get; set; }
     }
 
     public class GenCodeTsFileResponse
