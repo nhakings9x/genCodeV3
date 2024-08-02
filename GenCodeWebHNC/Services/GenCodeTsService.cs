@@ -32,8 +32,8 @@ namespace GenCodeWebHNC.Services
             indexContent = indexContent.Replace("@IndexModel", fileName);
 
             if (fileName.EndsWith("Model")) fileName = fileName.Substring(0, fileName.Length - "Model".Length);
-            indexContent = indexContent.Replace("@IndexFileName", fileName + "Index");
             indexContent = indexContent.Replace("@IndexFileExcelName", fileName + "Index");
+            indexContent = indexContent.Replace("@IndexFileName", fileName + "Index");
             return (indexContent, fileName + "Index");
         }
 
@@ -45,8 +45,8 @@ namespace GenCodeWebHNC.Services
             {
                 formModelName = "null";
                 formModelNameContructor = "any";
-                indexContent = indexContent.Replace("@FormModel", formModelName);
                 indexContent = indexContent.Replace("@FormModelContructor", formModelNameContructor);
+                indexContent = indexContent.Replace("@FormModel", formModelName);
                 return indexContent;
             }
 
@@ -55,13 +55,13 @@ namespace GenCodeWebHNC.Services
             {
                 formModelName = "null";
                 formModelNameContructor = "any";
-                indexContent = indexContent.Replace("@FormModel", formModelName);
                 indexContent = indexContent.Replace("@FormModelContructor", formModelNameContructor);
+                indexContent = indexContent.Replace("@FormModel", formModelName);
                 return indexContent;
             }
 
-            indexContent = indexContent.Replace("@FormModel", formModelName);
             indexContent = indexContent.Replace("@FormModelContructor", formModelName);
+            indexContent = indexContent.Replace("@FormModel", formModelName);
 
             return indexContent;
         }
@@ -75,8 +75,8 @@ namespace GenCodeWebHNC.Services
             {
                 optionFileName = "null";
                 optionModelNameContructor = "any";
-                indexContent = indexContent.Replace("@OptionModel", optionFileName);
                 indexContent = indexContent.Replace("@OptionModelContructor", optionModelNameContructor);
+                indexContent = indexContent.Replace("@OptionModel", optionFileName);
                 return indexContent;
             }
 
@@ -85,13 +85,13 @@ namespace GenCodeWebHNC.Services
             {
                 optionFileName = "null";
                 optionModelNameContructor = "any";
-                indexContent = indexContent.Replace("@OptionModel", optionFileName);
                 indexContent = indexContent.Replace("@OptionModelContructor", optionModelNameContructor);
+                indexContent = indexContent.Replace("@OptionModel", optionFileName);
                 return indexContent;
             }
 
+            indexContent = indexContent.Replace("@OptionModelContructor", optionFileName);
             indexContent = indexContent.Replace("@OptionModel", optionFileName);
-            indexContent = indexContent.Replace("@FormModelContructor", optionFileName);
 
             return indexContent;
         }
