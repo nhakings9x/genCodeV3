@@ -200,7 +200,39 @@ namespace GenCodeWebHNC.Common
             codeBuilder.AppendLine("                    \t});");
 
             return codeBuilder.ToString();
-        } 
+        }
+
+        public static string GeneratePropertyFunctions(this string cSharpModel)
+        {
+            var tsModel = cSharpModel.ToTsModel();
+            // Define regex patterns for extracting properties and their types
+            string propertyPattern = @"\s*(\w+):\s*(string|number|boolean|Date);";
+            var matches = Regex.Matches(tsModel, propertyPattern);
+
+            // Initialize StringBuilder to hold the generated code
+            var codeBuilder = new StringBuilder();
+
+            // Iterate over matches and generate code for each property
+            foreach (Match match in matches)
+            {
+                string propertyName = match.Groups[1].Value;
+                string propertyType = match.Groups[2].Value;
+
+                string functionBody = propertyType switch
+                {
+                    "Date" => $"this.$formBuilder.getDateBoxString('{propertyName}')",
+                    _ => $"this.$formBuilder.getData().{propertyName}"
+                };
+
+                codeBuilder.AppendLine($"                        {propertyName}: () => {{ return {functionBody} }},");
+            }
+
+            // Remove the last comma
+            if (codeBuilder.Length > 0)
+                codeBuilder.Length -= 3; // Removing the last comma and newline characters
+
+            return codeBuilder.ToString();
+        }
         #endregion
     }
 }

@@ -50,6 +50,8 @@ namespace GenCodeWebHNC.Services
                 formModelNameContructor = "any";
                 indexContent = indexContent.Replace("@FormModelContructor", formModelNameContructor);
                 indexContent = indexContent.Replace("@FormModel", formModelName);
+                indexContent = indexContent.Replace("@LoadParams", "null");
+                indexContent = indexContent.Replace("@LoadparamsFunc", "");
                 return indexContent;
             }
 
@@ -60,14 +62,19 @@ namespace GenCodeWebHNC.Services
                 formModelNameContructor = "any";
                 indexContent = indexContent.Replace("@FormModelContructor", formModelNameContructor);
                 indexContent = indexContent.Replace("@FormModel", formModelName);
+                indexContent = indexContent.Replace("@LoadParams", "null");
+                indexContent = indexContent.Replace("@LoadparamsFunc", "");
                 return indexContent;
             }
-
+            indexContent = indexContent.Replace("@LoadParams", "this.getLoadParams()");
             indexContent = indexContent.Replace("@FormModelContructor", formModelName);
             indexContent = indexContent.Replace("@FormModel", formModelName);
 
             indexContent = indexContent.Replace("@FormSearchContent", GenCodeTsConstan.BASE_FORM_DATA_CONTENT);
             indexContent = indexContent.Replace("@FormSearchItems", formModel.GenerateFormBuilderTsFromCSharpModel());
+
+            indexContent = indexContent.Replace("@LoadparamsFunc", GenCodeTsConstan.LOADPARAMS_FUNC);
+            indexContent = indexContent.Replace("@LoadParamReturn", formModel.GeneratePropertyFunctions());
 
             return indexContent;
         }

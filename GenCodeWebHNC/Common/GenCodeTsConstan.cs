@@ -13,12 +13,11 @@
                     super.onInit();
 
                     @FormSearchContent
-
                     this.$gridBuilder.createDataGrid(opts => opts.addSearchPanel(LanguageKey.Common.Search).height('70vh')
                         @ColumnGridContent
 
                         .dataSource(option => {
-                            option.addMvc('...', '...', this.getLoadParams(), 'POST');
+                            option.addMvc('...', '...', @LoadParams, 'POST');
                         })
                     );
                 }
@@ -31,16 +30,16 @@
                     });
                 }
 
-                private getLoadParams() {
-                    return {
-                        FromDate: () => { return this.$formBuilder.getDateBoxString('FromDate') },
-                        ToDate: () => { return this.$formBuilder.getDateBoxString('ToDate') },
-                        MaKhoHang: () => { return this.$formBuilder.getData().MaKhoHang }
-                    }
-                }
+                @LoadparamsFunc
             }
         }";
 
-        public const string BASE_FORM_DATA_CONTENT = "this.$formBuilder.createForm(opts => opts.formData(this.formData)\r\n                        @FormSearchItems\r\n                    );";
+        public const string BASE_FORM_DATA_CONTENT = "this.$formBuilder.createForm(opts => opts.formData(this.formData)\r\n                        @FormSearchItems\r\n                    );\n";
+
+        public const string LOADPARAMS_FUNC = @"private getLoadParams() {
+                    return {
+@LoadParamReturn
+                    }
+                }";
     }
 }
