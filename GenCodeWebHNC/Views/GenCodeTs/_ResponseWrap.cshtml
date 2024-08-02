@@ -28,13 +28,15 @@
         </div>
     </div>
 
-    <div class="right-response" style="flex: 1; height: 100%; background: #ebebeb; padding: 32px;">
+    <div class="right-response" style="flex: 1; height: 100%; background: #ebebeb; padding: 32px; overflow: hidden;">
         <div style="display: flex; flex-direction: column; height: 100%">
             <div class="toolbar-right" style="display: flex; justify-content: start; padding: 16px">
                 <button id="btn-copy-code-ts" class="btn btn-success">Copy</button>
             </div>
-            <div class="content-right-text" style="flex: 1">
-                <textarea id="file-content" class="form-control w-100 h-100" readonly></textarea>
+            <div class="content-right-text" style="flex: 1; height: calc(100% - 70px)">
+                @* <textarea id="file-content" class="form-control w-100 h-100" readonly></textarea> *@
+                <pre id="file-content" style="tab-size: 4; height: 100%"><code class="language-typescript">
+                </code></pre>
             </div>
         </div>
     </div>
@@ -75,13 +77,24 @@
         }
     }
 
-    function showContentVal(content){
-        $("#file-content").val("")
-        if (content == ""){
-            $("#file-content").val("Không có dữ liệu.")
-            return
+    function showContentVal(content) {
+        // Xóa toàn bộ nội dung của thẻ <pre>
+        $("#file-content").empty();
+
+        if (content == "") {
+            // Tạo một thẻ <code> với thông báo "Không có dữ liệu."
+            var codeElement = $(`<code class="language-typescript"></code>`).text("Không có dữ liệu.");
+            // Thêm thẻ <code> vào thẻ <pre>
+            $("#file-content").append(codeElement);
+        } else {
+            // Tạo một thẻ <code> với nội dung mới
+            var codeElement = $(`<code class="language-typescript"></code>`).text(content);
+            // Thêm thẻ <code> vào thẻ <pre>
+            $("#file-content").append(codeElement);
         }
-        $("#file-content").val(content)
+
+        // Highlight nội dung của thẻ <code>
+        hljs.highlightAll();
     }
 
     function cleanTreeFile(){
@@ -90,7 +103,7 @@
     }
     
     $("#btn-copy-code-ts").on("click", function () {
-        var textToCopy = document.getElementById('file-content').value;
+        var textToCopy = $('#file-content code').text();
 
         // Create a temporary textarea element
         var tempTextarea = document.createElement('textarea');

@@ -11,6 +11,10 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tokyo-night-dark.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
     <style>
         /* .toast-container {
             overflow: hidden;
@@ -39,6 +43,14 @@
         body{
             padding: 0;
             margin: 0
+        }
+
+        pre code {
+            display: block;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            box-sizing: border-box; /* Đảm bảo padding và border được tính vào kích thước */
         }
     </style>
 </head>
@@ -97,6 +109,15 @@
             color: white !important
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/typescript.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            hljs.highlightAll();
+        });
+    </script>
+    @* <script>hljs.highlightAll();</script> *@
+    @* <script>hljs.highlightElement(document.getElementById('file-content'));</script> *@
 </body>
 </html>
 

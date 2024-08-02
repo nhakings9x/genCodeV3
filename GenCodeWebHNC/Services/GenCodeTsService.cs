@@ -52,6 +52,7 @@ namespace GenCodeWebHNC.Services
                 indexContent = indexContent.Replace("@FormModel", formModelName);
                 indexContent = indexContent.Replace("@LoadParams", "null");
                 indexContent = indexContent.Replace("@LoadparamsFunc", "");
+                indexContent = indexContent.Replace("@FormSearchContent", "");
                 return indexContent;
             }
 
@@ -64,6 +65,8 @@ namespace GenCodeWebHNC.Services
                 indexContent = indexContent.Replace("@FormModel", formModelName);
                 indexContent = indexContent.Replace("@LoadParams", "null");
                 indexContent = indexContent.Replace("@LoadparamsFunc", "");
+                indexContent = indexContent.Replace("@FormSearchContent", "");
+
                 return indexContent;
             }
             indexContent = indexContent.Replace("@LoadParams", "this.getLoadParams()");
