@@ -40,7 +40,7 @@
                 activeFileResFirst()
             },
             error: (err) => {
-                onShowToast(err)
+                onShowToast(err.responseText)
                 console.log(err)
             }
         })

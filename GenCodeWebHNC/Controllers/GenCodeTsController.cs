@@ -20,21 +20,24 @@ namespace GenCodeWebHNC.Controllers
         }
 
         [HttpPost]
-        public GenCodeTsResponse GenCode(GenCodeTsRequest req)
+        public IActionResult GenCode(GenCodeTsRequest req)
         {
             var res = new GenCodeTsResponse();
-            res.ListFileModel = GenModelFileFolder(req);
-
+            (res.ListFileModel, bool isValid, string errorMess) = GenModelFileFolder(req);
+            if (!isValid)
+            {
+                return BadRequest(errorMess);
+            }
             res.ListFileForm = _serivce.GenIndexFileFolder(req);
 
             res.ListFileService = new List<GenCodeTsFileResponse> { _serivce.GenServiceFile(req.IndexModel) };
 
             res.FileViewIndex = new List<GenCodeTsFileResponse> { _serivce.GenIndexViewFile(req) };
 
-            return res;
+            return Ok(res);
         }
 
-        private List<GenCodeTsFileResponse> GenModelFileFolder(GenCodeTsRequest req)
+        private (List<GenCodeTsFileResponse>, bool, string) GenModelFileFolder(GenCodeTsRequest req)
         {
             List<GenCodeTsFileResponse> res = new();
             if (!string.IsNullOrEmpty(req.IndexModel))
@@ -44,6 +47,11 @@ namespace GenCodeWebHNC.Controllers
                     FileName = req.IndexModel.GetFileName(),
                     Content = req.IndexModel.ToTsModel()
                 };
+
+                if(string.IsNullOrEmpty(indexRes.FileName) || string.IsNullOrEmpty(indexRes.Content))
+                {
+                    return (new List<GenCodeTsFileResponse>(), false, "Kiểm tra lại Model Index");
+                }
 
                 res.Add(indexRes);
             }
@@ -56,6 +64,11 @@ namespace GenCodeWebHNC.Controllers
                     Content = req.FormModel.ToTsModel()
                 };
 
+                if (string.IsNullOrEmpty(formRes.FileName) || string.IsNullOrEmpty(formRes.Content))
+                {
+                    return (new List<GenCodeTsFileResponse>(), false, "Kiểm tra lại Model Form");
+                }
+
                 res.Add(formRes);
             }
 
@@ -67,10 +80,15 @@ namespace GenCodeWebHNC.Controllers
                     Content = req.OptionModel.ToTsModel()
                 };
 
+                if (string.IsNullOrEmpty(OptionRes.FileName) || string.IsNullOrEmpty(OptionRes.Content))
+                {
+                    return (new List<GenCodeTsFileResponse>(), false, "Kiểm tra lại Model Option");
+                }
+
                 res.Add(OptionRes);
             }
 
-            return res;
+            return (res, true , "");
         }
     }
 }
