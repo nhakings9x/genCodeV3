@@ -29,10 +29,13 @@ namespace GenCodeWebHNC.Services
         {
             var fileName = indexModel.GetFileName("");
 
+            indexContent = indexContent.Replace("@ColumnGridContent", indexModel.GenerateColumnTsFromCSharpModel());
+
             indexContent = indexContent.Replace("@IndexModel", fileName);
 
+            if (fileName.EndsWith("ViewModel")) fileName = fileName.Substring(0, fileName.Length - "ViewModel".Length);
             if (fileName.EndsWith("Model")) fileName = fileName.Substring(0, fileName.Length - "Model".Length);
-            indexContent = indexContent.Replace("@IndexFileExcelName", fileName + "Index");
+            indexContent = indexContent.Replace("@IndexFileExcelName", (fileName + "Index").GetDisplayName());
             indexContent = indexContent.Replace("@IndexFileName", fileName + "Index");
             return (indexContent, fileName + "Index");
         }
@@ -62,6 +65,9 @@ namespace GenCodeWebHNC.Services
 
             indexContent = indexContent.Replace("@FormModelContructor", formModelName);
             indexContent = indexContent.Replace("@FormModel", formModelName);
+
+            indexContent = indexContent.Replace("@FormSearchContent", GenCodeTsConstan.BASE_FORM_DATA_CONTENT);
+            indexContent = indexContent.Replace("@FormSearchItems", formModel.GenerateFormBuilderTsFromCSharpModel());
 
             return indexContent;
         }
