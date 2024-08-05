@@ -4,7 +4,7 @@
 }
 
 <div class="row h-100">
-    <div class="col-6">
+    <div class="col-6 h-100">
         <div class="w-100 d-flex align-items-center justify-content-between mb-2">
             <button id="btn-get-code" class="btn btn-success">Get Code</button>
             <select id="type-get-code" class="form-select " style="width: 350px; height: 38px; padding: 4px 8px; font-weight: 500">
@@ -16,11 +16,13 @@
                 <option value="@((int)GenCodeType.Translate)">Google dịch (nvarchar = 500)</option>
             </select>
         </div>
-        <textarea id="content-c-sharp" class="form-control w-100 h-100"> </textarea>
+        <textarea id="content-c-sharp" class="form-control w-100 h-100" style="font-size: 12px"> </textarea>
     </div>
-    <div class="col-6">
+    <div class="col-6 h-100">
         <button id="btn-copy-code-ts" class="btn btn-success mb-2">Copy</button>
-        <textarea id="res-ts-code" class="form-control w-100 h-100" readonly style="background: #f5f5f5"> </textarea>
+        @* <textarea id="res-ts-code" class="form-control w-100 h-100" readonly style="background: #f5f5f5"> </textarea> *@
+        <pre id="file-content" style="height: 100%; font-size: 12px"><code class="language-typescript">
+                </code></pre>
     </div>
 </div>
 
@@ -43,6 +45,7 @@
             },
             success:(res) => {
                 $("#res-ts-code").val(res)
+                showContentVal(res)
             },
             error: (err) =>{
                 onShowToast(err)
@@ -51,8 +54,28 @@
         })
     })
 
+    function showContentVal(content) {
+        // Xóa toàn bộ nội dung của thẻ <pre>
+        $("#file-content").empty();
+
+        if (content == "") {
+            // Tạo một thẻ <code> với thông báo "Không có dữ liệu."
+            var codeElement = $(`<code class="language-typescript"></code>`).text("Không có dữ liệu.");
+            // Thêm thẻ <code> vào thẻ <pre>
+            $("#file-content").append(codeElement);
+        } else {
+            // Tạo một thẻ <code> với nội dung mới
+            var codeElement = $(`<code class="language-typescript"></code>`).text(content);
+            // Thêm thẻ <code> vào thẻ <pre>
+            $("#file-content").append(codeElement);
+        }
+
+        // Highlight nội dung của thẻ <code>
+        hljs.highlightAll();
+    }
+
     $("#btn-copy-code-ts").on("click", function(){
-        var textToCopy = document.getElementById('res-ts-code').value;
+        var textToCopy = $('#file-content code').text();
 
         // Create a temporary textarea element
         var tempTextarea = document.createElement('textarea');
