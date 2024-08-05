@@ -1,0 +1,183 @@
+﻿
+
+
+<div id="response-wrap" style="display: flex; height: calc(100vh - 60px); font-size: 14px">
+    <div class="left-response" style=" height: 100%; width: 450px">
+        <div class="folder-structure">
+            <ul class="tree">
+                <li>
+                    <span class="folder">Parent Folder</span>
+                    <ul id="parent-folder">
+                        <li>
+                            <span class="folder">Forms</span>
+                            <ul id="forms-file-wrap">
+                                @* <li><span class="file">File 1.1</span></li>
+                                <li><span class="file">File 1.2</span></li> *@
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="folder">Models</span>
+                            <ul id="model-file-wrap">
+                                @* <li><span class="file">File 2.1</span></li> *@
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <span class="folder">Views</span>
+                    <ul>
+                        <li>
+                            <span class="folder">Forms</span>
+                            <ul>
+                                <li><span id="index-cshtml-span" class="file" data-file-name="index.cshtml">index.cshtml</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="right-response" style="flex: 1; height: 100%; background: #ebebeb; padding: 32px; overflow: hidden;">
+        <div style="display: flex; flex-direction: column; height: 100%">
+            <div class="toolbar-right" style="display: flex; justify-content: start; padding: 16px">
+                <button id="btn-copy-code-ts" class="btn btn-success">Copy</button>
+            </div>
+            <div class="content-right-text" style="flex: 1; height: calc(100% - 70px)">
+                @* <textarea id="file-content" class="form-control w-100 h-100" readonly></textarea> *@
+                <pre id="file-content" style="height: 100%"><code class="language-typescript">
+                </code></pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).on("dblclick", ".tree .file", function () {
+        // Lấy phần tử được nhấp đúp
+        const clickedFile = this;
+
+        // Xóa lớp 'active' từ tất cả các tệp
+        $('.tree .file').removeClass('active');
+
+        // Thêm lớp 'active' vào tệp được nhấp đúp
+        $(clickedFile).addClass('active');
+
+        var id = $(clickedFile).data("id");
+        var content = findContentByFileName(responseGolbal, id)
+
+        showContentVal(content);
+    });
+
+    function findContentByFileName(data, id) {
+        for (let key in data) {
+            let found = data[key].find(item => item.id === id);
+            if (found) {
+                return found.content;
+            }
+        }
+        return null;
+    }
+
+    function activeFileResFirst() {
+        const files = document.querySelectorAll('.tree .file');
+        if (files) {
+            $(files[0]).addClass('active')
+            $(files[0]).trigger("dblclick")
+        }
+    }
+
+    function showContentVal(content) {
+        // Xóa toàn bộ nội dung của thẻ <pre>
+        $("#file-content").empty();
+
+        if (content == "") {
+            // Tạo một thẻ <code> với thông báo "Không có dữ liệu."
+            var codeElement = $(`<code class="language-typescript"></code>`).text("Không có dữ liệu.");
+            // Thêm thẻ <code> vào thẻ <pre>
+            $("#file-content").append(codeElement);
+        } else {
+            // Tạo một thẻ <code> với nội dung mới
+            var codeElement = $(`<code class="language-typescript"></code>`).text(content);
+            // Thêm thẻ <code> vào thẻ <pre>
+            $("#file-content").append(codeElement);
+        }
+
+        // Highlight nội dung của thẻ <code>
+        hljs.highlightAll();
+    }
+
+    function cleanTreeFile() {
+        $("#forms-file-wrap").empty()
+        $("#model-file-wrap").empty()
+        $(".file-service").remove()
+    }
+
+    $("#btn-copy-code-ts").on("click", function () {
+        var textToCopy = $('#file-content code').text();
+
+        // Create a temporary textarea element
+        var tempTextarea = document.createElement('textarea');
+        tempTextarea.value = textToCopy;
+        document.body.appendChild(tempTextarea);
+
+        // Select the text
+        tempTextarea.select();
+        tempTextarea.setSelectionRange(0, 99999); // For mobile devices
+
+        // Copy the text to clipboard
+        document.execCommand('copy');
+
+        // Remove the temporary textarea element
+        document.body.removeChild(tempTextarea);
+
+        // Optionally, provide feedback to the user
+        // alert('Đã copy');
+        onShowToast("Đã copy")
+    })
+</script>
+
+<style>
+    .folder-structure {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Styles for the tree class */
+    .tree {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+        .tree .folder, .tree .file {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+            .tree .folder::before {
+                content: '📁';
+                margin-right: 5px;
+            }
+
+            .tree .file::before {
+                content: '📄';
+                margin-right: 5px;
+            }
+
+        .tree ul {
+            margin-left: 20px;
+            border-left: 1px solid #ccc;
+            padding-left: 10px;
+        }
+
+        .tree .file.active {
+            background-color: #007bff;
+            color: white;
+            border-radius: 3px;
+            padding: 2px 5px;
+        }
+</style>
