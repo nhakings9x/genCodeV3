@@ -34,6 +34,12 @@ namespace GenCodeWebHNC.Controllers
 
             res.FileViewIndex = new List<GenCodeTsFileResponse> { _serivce.GenIndexViewFile(req) };
 
+            res.ListFileLanguageKey = new List<GenCodeTsFileResponse>
+            {
+                new ("LanguageKey.ts", req.IndexModel.ToTsModel().GenerateLanguageKeyCode()),
+                new ("ListLanguageKey", req.IndexModel.ToTsModel().GenerateValues()),
+            };
+
             return Ok(res);
         }
 

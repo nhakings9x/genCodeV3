@@ -25,6 +25,30 @@ namespace GenCodeWebHNC.Common
             return string.IsNullOrEmpty(className) ? "" : className + fileType;
         }
 
+        public static string GetFileNameFromTs(this string csharpClass, string fileType = ".ts")
+        {
+            string className = string.Empty;
+
+            if (csharpClass == null) return className;
+            var lines = csharpClass.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+            foreach (var line in lines)
+            {
+                if (line.Trim().StartsWith("export interface"))
+                {
+                    Match classMatch = Regex.Match(line.Trim(), @"export interface (\w+)");
+                    if (classMatch.Success)
+                    {
+                        className = classMatch.Groups[1].Value;
+                    }
+                }
+            }
+
+            if (className.EndsWith("ViewModel")) className = className.Substring(0, className.Length - "ViewModel".Length);
+            if (className.EndsWith("Model")) className = className.Substring(0, className.Length - "Model".Length);
+
+            return string.IsNullOrEmpty(className) ? "" : className + fileType;
+        }
+
         public static string ToTsModel(this string csharpClass)
         {
             var lines = csharpClass.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
@@ -110,11 +134,11 @@ namespace GenCodeWebHNC.Common
         public static string GenerateColumnTsFromCSharpModel(this string cSharpModel)
         {
             string tsModel = cSharpModel.ToTsModel();
-            var columnContent = tsModel.GenerateColumnsCode(true);
+            var columnContent = tsModel.GenerateColumnsCode(true, true);
             return columnContent;
         }
 
-        public static string GenerateColumnsCode(this string tsClassDefinition, bool genModelCSharp = false)
+        public static string GenerateColumnsCode(this string tsClassDefinition, bool genModelCSharp = false, bool isGenGridMode = false)
         {
             var regex = new Regex(@"(\w+): (\w+);");
             var matches = regex.Matches(tsClassDefinition);
@@ -126,6 +150,11 @@ namespace GenCodeWebHNC.Common
                 string propertyName = match.Groups[1].Value;
                 string propertyType = match.Groups[2].Value;
                 string column = $"columns.addColumn('{propertyName}', \"{GetDisplayName(propertyName)}\").width(150)";
+
+                if (isGenGridMode)
+                {
+                    column = $"columns.addColumn('{propertyName}', {"LanguageKey." + GetFileNameFromTs(tsClassDefinition, "") + ".Table." + propertyName}).width(150)";
+                }
 
                 if (propertyType == "number")
                 {
@@ -259,6 +288,63 @@ namespace GenCodeWebHNC.Common
             }
 
             sb.AppendLine("\t\t}");
+
+            return sb.ToString();
+        }
+        #endregion
+
+        #region KeyLanguage
+        public static string GenerateLanguageKeyCode(this string model)
+        {
+            // Sử dụng regex để lấy tên interface
+            var interfaceNameMatch = Regex.Match(model, @"interface\s+(\w+)\s*{");
+            if (!interfaceNameMatch.Success)
+            {
+                throw new Exception("Interface name not found in the model.");
+            }
+
+            string interfaceName = interfaceNameMatch.Groups[1].Value;
+
+            var sb = new StringBuilder();
+            sb.AppendLine("namespace My {");
+            sb.AppendLine("    export namespace LanguageKey {");
+            sb.AppendLine($"        const {interfaceName} = {{");
+
+            // Sử dụng regex để lấy các key trong interface
+            var keyMatches = Regex.Matches(model, @"\s*(\w+)\s*:\s*\w+;");
+            foreach (Match match in keyMatches)
+            {
+                string key = match.Groups[1].Value;
+                sb.AppendLine($"            {key}: \"@ProjectName.{interfaceName}.Table.{key}\",");
+            }
+
+            sb.AppendLine("        };");
+            sb.AppendLine("    }");
+            sb.AppendLine("}");
+
+            return sb.ToString();
+        }
+
+        public static string GenerateValues(this string model)
+        {
+            var sb = new StringBuilder();
+
+            // Sử dụng regex để lấy tên interface
+            var interfaceNameMatch = Regex.Match(model, @"interface\s+(\w+)\s*{");
+            if (!interfaceNameMatch.Success)
+            {
+                throw new Exception("Interface name not found in the model.");
+            }
+
+            string interfaceName = interfaceNameMatch.Groups[1].Value;
+
+            // Sử dụng regex để lấy các key trong interface
+            var keyMatches = Regex.Matches(model, @"\s*(\w+)\s*:\s*\w+;");
+            foreach (Match match in keyMatches)
+            {
+                string key = match.Groups[1].Value;
+                sb.AppendLine($"@ProjectName.{interfaceName}.Table.{key}");
+            }
 
             return sb.ToString();
         }

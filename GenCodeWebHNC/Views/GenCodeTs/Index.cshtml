@@ -37,6 +37,7 @@
                 genFileModel(res.listFileModel)
                 genServiceModel(res.listFileService)
                 setIndexCshtmlId(res.fileViewIndex)
+                genLanguageKeyFiles(res.listFileLanguageKey)
                 toggleRequestWrap()
                 activeFileResFirst()
             },
@@ -74,6 +75,14 @@
     function setIndexCshtmlId(fileViewIndex) {
         if (fileViewIndex) {
             $("#index-cshtml-span").data("id", fileViewIndex[0].id)
+        }
+    }
+
+    function genLanguageKeyFiles(listFileLanguageKey){
+        if (listFileLanguageKey) {
+            listFileLanguageKey.forEach(x => {
+                $("#languagekey-files").append(`<li class="file-service"><span class="file" data-file-name="${x.fileName}" data-id="${x.id}"> ${x.fileName} </span></li >`)
+            })
         }
     }
 </script>
