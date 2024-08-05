@@ -5,8 +5,8 @@
         public const string BASE_INDEX_CONTENT = 
 @"namespace My {
         export class @IndexFileName extends BaseDevExGridForm<@IndexModel, @FormModel, @OptionModel>{
-            constructor(container: JQuery, formData: @FormModelContructor, option: @OptionModelContructor) {
-                super(container, formData, option);
+            constructor(container: JQuery, formData: @FormModelContructor, options: @OptionModelContructor) {
+                super(container, formData, options);
             }
 
             protected onInit(): void {

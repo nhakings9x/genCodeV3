@@ -36,7 +36,7 @@ namespace GenCodeWebHNC.Services
 
             if (fileName.EndsWith("ViewModel")) fileName = fileName.Substring(0, fileName.Length - "ViewModel".Length);
             if (fileName.EndsWith("Model")) fileName = fileName.Substring(0, fileName.Length - "Model".Length);
-            indexContent = indexContent.Replace("@IndexFileExcelName", (fileName + "Index").GetDisplayName());
+            indexContent = indexContent.Replace("@IndexFileExcelName", (fileName).GetDisplayName());
             indexContent = indexContent.Replace("@IndexFileName", fileName + "Index");
             return (indexContent, fileName + "Index");
         }
@@ -125,7 +125,7 @@ namespace GenCodeWebHNC.Services
             var serviceContent = GenCodeTsConstans.BASE_SERVICE_CONTENT;
             serviceContent = serviceContent.Replace("@IndexFileName", fileName);
             var  res = new GenCodeTsFileResponse{ 
-                FileName = fileName,
+                FileName = fileName + "Service",
                 Content = serviceContent,
             };
 

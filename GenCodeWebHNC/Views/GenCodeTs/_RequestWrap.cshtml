@@ -3,9 +3,9 @@
 
 <div id="request-wrap" style="position: absolute; top: 0; left: 0; right: 0">
     <div>
-        <div id="request-content-wrap" class="w-100" style="height: 80vh; background: #a39c9c; width: 100%;">
+        <div id="request-content-wrap" class="w-100 h-0" style="height: 80vh; background: #a39c9c; width: 100%;">
             <div class="container h-100">
-                <div id="input-wrap" class=" row w-100 h-100 p-4">
+                <div id="input-wrap" class=" row w-100 h-100 p-4 d-none">
                     <div class="col-4 h-90" style="display: flex; justify-content: end; flex-direction: column">
                         <div class="toolbar-right" style="padding-bottom: 16px">
                             <b style="font-size: 24px;">Model Index</b>
@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
         <div id="request-content" style="position: absolute; top: 100%; right: 150px;">
             <div class="triangle-container" onclick="toggleRequestWrap()">
@@ -46,10 +46,14 @@
         $("#request-content-wrap").toggleClass("h-0")
         $("#input-wrap").toggleClass("d-none")
     }
+
+    $(document).ready(() => {
+        toggleRequestWrap()
+    })
 </script>
 
 <style>
-    #request-content-wrap{
+    #request-content-wrap {
         transition: height 0.5s ease;
     }
 

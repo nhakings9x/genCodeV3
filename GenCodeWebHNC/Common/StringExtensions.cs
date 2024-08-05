@@ -133,7 +133,7 @@ namespace GenCodeWebHNC.Common
                 }
                 else if (propertyType == "Date")
                 {
-                    column += ".formatDateTime(\"yyyy-MM-dd\")";
+                    column += ".formatDateTime(\"yyyy-MM-dd HH:mm:ss\")";
                 }
 
                 columns.Add(column + ";");
@@ -162,11 +162,11 @@ namespace GenCodeWebHNC.Common
             return columnContent;
         }
 
-        public static string GenerateCodeFormBuilder(this string tsModel)
+        public static string GenerateCodeFormBuilder(this string tsFormModel)
         {
             // Define regex patterns for extracting properties and their types
             string propertyPattern = @"\s*(\w+):\s*(string|number|boolean|Date);";
-            var matches = Regex.Matches(tsModel, propertyPattern);
+            var matches = Regex.Matches(tsFormModel, propertyPattern);
 
             // Initialize StringBuilder to hold the generated code
             var codeBuilder = new StringBuilder();
