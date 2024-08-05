@@ -242,8 +242,8 @@ namespace GenCodeWebHNC.Common
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("\n\t\t{");
 
-            // Extract the properties
-            var matches = Regex.Matches(tsModel, @"\s+(\w+):\s+\w+;");
+            // Trích xuất các thuộc tính
+            var matches = Regex.Matches(tsModel, @"\s+(\w+):\s+[\w\[\]]+;");
 
             foreach (Match match in matches)
             {
@@ -251,10 +251,10 @@ namespace GenCodeWebHNC.Common
                 sb.AppendLine($"\t\t\t{propertyName}: ...,");
             }
 
-            // Remove the last comma
+            // Xóa dấu phẩy cuối cùng
             if (matches.Count > 0)
             {
-                sb.Length -= 3;  // Remove the last comma and newline
+                sb.Length -= 3;  // Xóa dấu phẩy và dòng mới cuối cùng
                 sb.AppendLine();
             }
 
