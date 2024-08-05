@@ -197,7 +197,7 @@ namespace GenCodeWebHNC.Common
                 codeBuilder.AppendLine($"                        \t\t.editor(e => e.{editorMethod}('{propertyName.ToLower()}', this.formData.{propertyName}));");
             }
 
-            codeBuilder.AppendLine("                    \t});");
+            codeBuilder.AppendLine("                    \t})");
 
             return codeBuilder.ToString();
         }
