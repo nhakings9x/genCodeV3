@@ -13,6 +13,11 @@
 
     public class GenCodeTsFileResponse
     {
+        public GenCodeTsFileResponse() { 
+            Id = Guid.NewGuid().ToString();
+        }
+        public string Id{ get; set; }
+
         public string FileName { get; set; }
 
         public string Content { get; set; }

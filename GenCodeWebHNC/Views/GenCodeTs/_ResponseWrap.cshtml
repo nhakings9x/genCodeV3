@@ -29,7 +29,7 @@
                         <li>
                             <span class="folder">Forms</span>
                             <ul>
-                                <li><span class="file" data-file-name="index.cshtml">index.cshtml</span></li>
+                                <li><span id="index-cshtml-span" class="file" data-file-name="index.cshtml">index.cshtml</span></li>
                             </ul>
                         </li>
                     </ul>
@@ -63,15 +63,15 @@
         // Thêm lớp 'active' vào tệp được nhấp đúp
         $(clickedFile).addClass('active');
 
-        var fileName = $(clickedFile).data("file-name");
-        var content = findContentByFileName(responseGolbal, fileName)
+        var id = $(clickedFile).data("id");
+        var content = findContentByFileName(responseGolbal, id)
 
         showContentVal(content);
     });
 
-    function findContentByFileName(data, fileName) {
+    function findContentByFileName(data, id) {
         for (let key in data) {
-            let found = data[key].find(item => item.fileName === fileName);
+            let found = data[key].find(item => item.id === id);
             if (found) {
                 return found.content;
             }

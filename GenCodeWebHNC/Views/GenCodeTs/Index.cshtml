@@ -36,6 +36,7 @@
                 genFormsModel(res.listFileForm)
                 genFileModel(res.listFileModel)
                 genServiceModel(res.listFileService)
+                setIndexCshtmlId(res.fileViewIndex)
                 toggleRequestWrap()
                 activeFileResFirst()
             },
@@ -49,7 +50,7 @@
     function genFileModel(listFileModel) {
         if (listFileModel) {
             listFileModel.forEach(x => {
-                $("#model-file-wrap").append(`<li><span class="file" data-file-name="${x.fileName}"> ${x.fileName} </span></li >`)
+                $("#model-file-wrap").append(`<li><span class="file" data-file-name="${x.fileName}" data-id="${x.id}"> ${x.fileName} </span></li >`)
             })
         }
     }
@@ -57,7 +58,7 @@
     function genFormsModel(listFileModel) {
         if (listFileModel) {
             listFileModel.forEach(x => {
-                $("#forms-file-wrap").append(`<li><span class="file" data-file-name="${x.fileName}"> ${x.fileName} </span></li >`)
+                $("#forms-file-wrap").append(`<li><span class="file" data-file-name="${x.fileName}" data-id="${x.id}"> ${x.fileName} </span></li >`)
             })
         }
     }
@@ -65,69 +66,75 @@
     function genServiceModel(listFileService){
         if (listFileService) {
             listFileService.forEach(x => {
-                $("#parent-folder").append(`<li class="file-service"><span class="file" data-file-name="${x.fileName}"> ${x.fileName} </span></li >`)
+                $("#parent-folder").append(`<li class="file-service"><span class="file" data-file-name="${x.fileName}" data-id="${x.id}"> ${x.fileName} </span></li >`)
             })
+        }
+    }
+
+    function setIndexCshtmlId(fileViewIndex) {
+        if (fileViewIndex) {
+            $("#index-cshtml-span").data("id", fileViewIndex[0].id)
         }
     }
 </script>
 @* test *@
 <script>
-    // $("#index_model").val(`namespace FastLink.V3.Operation.Services
-    // {
-    //     public class SupermarketInventoryByStallsReportModel
-    //     {
-    //         public string MaSanPhamCha { get; set; }
+    $("#index_model").val(`namespace FastLink.V3.Operation.Services
+    {
+        public class SupermarketInventoryByStallsReportModel
+        {
+            public string MaSanPhamCha { get; set; }
 
-    //         public string MaHang { get; set; }
-    //         public string MaSanPham { get; set; }
+            public string MaHang { get; set; }
+            public string MaSanPham { get; set; }
 
-    //         public string MaSpNsx { get; set; }
-    //         public string TenHang { get; set; }
+            public string MaSpNsx { get; set; }
+            public string TenHang { get; set; }
 
-    //         public string TenSanPham { get; set; }
-    //         public string DonViTinh { get; set; }
+            public string TenSanPham { get; set; }
+            public string DonViTinh { get; set; }
 
-    //         public string MaDonViTinh { get; set; }
-    //         public string MaNhaCungCap { get; set; }
-    //         public string TenNhaCungCap { get; set; }
+            public string MaDonViTinh { get; set; }
+            public string MaNhaCungCap { get; set; }
+            public string TenNhaCungCap { get; set; }
 
-    //         public decimal SoLuongTonDauKy { get; set; }
-    //         public decimal ThanhTienTonDauKy { get; set; }
-    //         public decimal SoLuongNhapKho { get; set; }
-    //         public decimal ThanhTienNhap { get; set; }
-    //         public decimal SoLuongXuatKho { get; set; }
-    //         public decimal ThanhTienXuat { get; set; }
-    //         public decimal SoLuongTonCuoiKy { get; set; }
-    //         public decimal ThanhTienTonCuoiKy { get; set; }
-    //         public decimal SoLuongKiemDem { get; set; }
-    //         public decimal ThanhTienKiemDem { get; set; }
+            public decimal SoLuongTonDauKy { get; set; }
+            public decimal ThanhTienTonDauKy { get; set; }
+            public decimal SoLuongNhapKho { get; set; }
+            public decimal ThanhTienNhap { get; set; }
+            public decimal SoLuongXuatKho { get; set; }
+            public decimal ThanhTienXuat { get; set; }
+            public decimal SoLuongTonCuoiKy { get; set; }
+            public decimal ThanhTienTonCuoiKy { get; set; }
+            public decimal SoLuongKiemDem { get; set; }
+            public decimal ThanhTienKiemDem { get; set; }
 
-    //         public string NhomSanPham { get; set; }
-    //         public string NhomSanPhamChiTiet { get; set; }
-    //         public string Stalls { get; set; }
-    //         public string MaNhomSanPham { get; set; }
-    //         public DateTime CreatedTime { get; set; }
-    //     }
-    // }
-    // `)
-    // $("#form_model").val(`using System;
+            public string NhomSanPham { get; set; }
+            public string NhomSanPhamChiTiet { get; set; }
+            public string Stalls { get; set; }
+            public string MaNhomSanPham { get; set; }
+            public DateTime CreatedTime { get; set; }
+        }
+    }
+    `)
+    $("#form_model").val(`using System;
 
-    // namespace FastLink.V3.Operation.Services
-    // {
-    //     public class SupermarketInventoryByStallsReportSearchModel
-    //     {
-    //         public DateTime FromDate { get; set; }
+    namespace FastLink.V3.Operation.Services
+    {
+        public class SupermarketInventoryByStallsReportSearchModel
+        {
+            public DateTime FromDate { get; set; }
 
-    //         public DateTime ToDate { get; set; }
+            public DateTime ToDate { get; set; }
 
-    //         public string MaKhoHang { get; set; }
-    //     }
-    // }
-    // `)
-    // $("#option_model").val(`public class SupermarketInventoryByStallsReportSearchModel
-    //     {
-    //         public StringAsLookupItem Content1 { get; set; }
+            public string MaKhoHang { get; set; }
+        }
+    }
+    `)
+    $("#option_model").val(`public class SupermarketInventoryByStallsReportOptionModel
+        {
+            public StringAsLookupItem Content1 { get; set; }
 
-    //         public List<StringAsLookupItem> Content2 { get; set; }
-    //     }`)
+            public List<StringAsLookupItem> Content2 { get; set; }
+        }`)
 </script>
