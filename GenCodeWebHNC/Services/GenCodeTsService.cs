@@ -147,10 +147,12 @@ namespace GenCodeWebHNC.Services
             {
                 var content = req.FormModel.GenerateFormDataCode();
                 indexViewContent = indexViewContent.Replace("@FormModel", content.Substring(0, content.Length - 2));
+                indexViewContent = indexViewContent.Replace("@IsSearchPage", "\n    Options.IsSearchPage = true;");
             }
             else
             {
                 indexViewContent = indexViewContent.Replace("@FormModel", "null");
+                indexViewContent = indexViewContent.Replace("@IsSearchPage", "");
             }
 
             if (!string.IsNullOrEmpty(req.OptionModel))

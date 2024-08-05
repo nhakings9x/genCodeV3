@@ -72,8 +72,7 @@
     var title = ""..."";
     var breadCrumbUrl = Url.Action<@IndexFileNameController>(x => x.Index());
     ViewData[""title""] = title;
-    Layout = WebSharedConst.LAYOUT_ADMIN_DEVEXDATAGRID;
-    Options.IsSearchPage = true;
+    Layout = WebSharedConst.LAYOUT_ADMIN_DEVEXDATAGRID;@IsSearchPage
     Options.Title = title;
     Options.BreadCrumb = new WebBreadCrumbModel
     {
