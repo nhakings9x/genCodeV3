@@ -309,7 +309,8 @@ namespace GenCodeWebHNC.Common
             sb.AppendLine("namespace My {");
             sb.AppendLine("    export namespace LanguageKey {");
             sb.AppendLine($"        const {interfaceName} = {{");
-
+            if (interfaceName.EndsWith("ViewModel")) interfaceName = interfaceName.Substring(0, interfaceName.Length - "ViewModel".Length);
+            if (interfaceName.EndsWith("Model")) interfaceName = interfaceName.Substring(0, interfaceName.Length - "Model".Length);
             // Sử dụng regex để lấy các key trong interface
             var keyMatches = Regex.Matches(model, @"\s*(\w+)\s*:\s*\w+;");
             foreach (Match match in keyMatches)
@@ -337,7 +338,8 @@ namespace GenCodeWebHNC.Common
             }
 
             string interfaceName = interfaceNameMatch.Groups[1].Value;
-
+            if (interfaceName.EndsWith("ViewModel")) interfaceName = interfaceName.Substring(0, interfaceName.Length - "ViewModel".Length);
+            if (interfaceName.EndsWith("Model")) interfaceName = interfaceName.Substring(0, interfaceName.Length - "Model".Length);
             // Sử dụng regex để lấy các key trong interface
             var keyMatches = Regex.Matches(model, @"\s*(\w+)\s*:\s*\w+;");
             foreach (Match match in keyMatches)
