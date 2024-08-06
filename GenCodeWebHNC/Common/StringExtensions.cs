@@ -304,21 +304,23 @@ namespace GenCodeWebHNC.Common
             }
 
             string interfaceName = interfaceNameMatch.Groups[1].Value;
+            if (interfaceName.EndsWith("ViewModel")) interfaceName = interfaceName.Substring(0, interfaceName.Length - "ViewModel".Length);
+            if (interfaceName.EndsWith("Model")) interfaceName = interfaceName.Substring(0, interfaceName.Length - "Model".Length);
 
             var sb = new StringBuilder();
             sb.AppendLine("namespace My {");
             sb.AppendLine("    export namespace LanguageKey {");
             sb.AppendLine($"        const {interfaceName} = {{");
-            if (interfaceName.EndsWith("ViewModel")) interfaceName = interfaceName.Substring(0, interfaceName.Length - "ViewModel".Length);
-            if (interfaceName.EndsWith("Model")) interfaceName = interfaceName.Substring(0, interfaceName.Length - "Model".Length);
+            sb.AppendLine($"             const Table = {{");
             // Sử dụng regex để lấy các key trong interface
             var keyMatches = Regex.Matches(model, @"\s*(\w+)\s*:\s*\w+;");
             foreach (Match match in keyMatches)
             {
                 string key = match.Groups[1].Value;
-                sb.AppendLine($"            {key}: \"@ProjectName.{interfaceName}.Table.{key}\",");
+                sb.AppendLine($"                 {key}: \"@ProjectName.{interfaceName}.Table.{key}\",");
             }
 
+            sb.AppendLine("            };");
             sb.AppendLine("        };");
             sb.AppendLine("    }");
             sb.AppendLine("}");
