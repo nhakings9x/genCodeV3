@@ -24,7 +24,7 @@ namespace GenCodeWebHNC.Extensions
             var html = new StringBuilder();
             if (file.Children != null && file.Children.Count > 0)
             {
-                html.Append($"<li><span class=\"folder\" data-id=\"{file.Id}\" data-content=\"{file.Content}\">{file.FileName}</span>");
+                html.Append($"<li><span class=\"folder\" data-id=\"{file.Id}\" data-content=\"{System.Net.WebUtility.HtmlEncode(file.Content)}\">{file.FileName}</span>");
                 html.Append("<ul>");
                 foreach (var child in file.Children)
                 {
@@ -35,9 +35,10 @@ namespace GenCodeWebHNC.Extensions
             }
             else
             {
-                html.Append($"<li><span class=\"file\" data-id=\"{file.Id}\" data-content=\"{file.Content}\">{file.FileName}</span></li>");
+                html.Append($"<li><span class=\"file\" data-id=\"{file.Id}\" data-content=\"{System.Net.WebUtility.HtmlEncode(file.Content)}\">{file.FileName}</span></li>");
             }
             return html.ToString();
         }
+
     }
 }

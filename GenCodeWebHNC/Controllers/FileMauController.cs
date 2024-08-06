@@ -1,4 +1,5 @@
-﻿using GenCodeWebHNC.Models;
+﻿using GenCodeWebHNC.Common;
+using GenCodeWebHNC.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GenCodeWebHNC.Controllers
@@ -16,14 +17,25 @@ namespace GenCodeWebHNC.Controllers
             {
                 new FileItemModel
                 {
-                    FileName = "Popup",
+                    FileName = "Typescript",
                     Children = new List<FileItemModel>
                     {
                         new() {
-                            FileName = "Forms",
+                            FileName = "Popup",
                             Children = new List<FileItemModel>
                             {
-                                new() { FileName = "SupermarketInventoryByStallsReportIndex.ts" }
+                                new() {
+                                    FileName = "Popup.ts" ,
+                                    Content = FileMauConstants.POPUP_CONTENT
+                                },
+                                new() { 
+                                    FileName = "PopupGrid.ts" ,
+                                    Content = FileMauConstants.POPUP_GRID_CONTENT
+                                },
+                                new() {
+                                    FileName = "PopupTabPenal.ts" ,
+                                    Content = FileMauConstants.POPUP_TAB_PENAL
+                                }
                             }
                         },
                     }
