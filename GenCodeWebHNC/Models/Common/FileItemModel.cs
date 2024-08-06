@@ -2,7 +2,7 @@
 {
     public class FileItemModel
     {
-        public string Id { get; set; }
+        public string Id { get; set; } = Guid.NewGuid().ToString();
 
         public string FileName { get; set; }
 

@@ -1,24 +1,5 @@
-﻿
-@{
+﻿@{
     Layout = "_Layout.Ts";
-}
-
-@functions {
-    private string RenderTree(List<FileItemModel> files)
-    {
-        var html = "<ul>";
-        foreach (var file in files)
-        {
-            html += $"<li>{file.FileName}";
-            if (file.Children != null && file.Children.Count > 0)
-            {
-                html += RenderTree(file.Children);
-            }
-            html += "</li>";
-        }
-        html += "</ul>";
-        return html;
-    }
 }
 
 <div id="response-wrap" style="display: flex; height: calc(100vh - 60px); font-size: 14px">
@@ -31,13 +12,12 @@
         </div>
     </div>
     @RenderBody()
-    <div class="right-response" style="flex: 1; height: 100%; background: #ebebeb; padding: 32px; overflow: hidden;">
+    <div class="right-response" style="flex: 1; height: 100%; background: #ebebeb; padding: 32px; overflow: hidden; padding-top: 16px">
         <div style="display: flex; flex-direction: column; height: 100%">
             <div class="toolbar-right" style="display: flex; justify-content: start; padding: 16px">
                 <button id="btn-copy-code-ts" class="btn btn-success">Copy</button>
             </div>
             <div class="content-right-text" style="flex: 1; height: calc(100% - 70px)">
-                @* <textarea id="file-content" class="form-control w-100 h-100" readonly></textarea> *@
                 <pre id="file-content" style="height: 100%"><code class="language-typescript">
                 </code></pre>
             </div>
@@ -57,7 +37,7 @@
         $(clickedFile).addClass('active');
 
         var id = $(clickedFile).data("id");
-        var content = findContentByFileName(responseGolbal, id)
+        var content = $(clickedFile).data("content")
 
         showContentVal(content);
     });

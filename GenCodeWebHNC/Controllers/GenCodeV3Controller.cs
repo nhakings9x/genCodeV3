@@ -1,4 +1,4 @@
-using GenCodeWebHNC.Common;
+using GenCodeWebHNC.Extensions;
 using GenCodeWebHNC.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;

@@ -16,41 +16,16 @@ namespace GenCodeWebHNC.Controllers
             {
                 new FileItemModel
                 {
-                    FileName = "Parent Folder",
+                    FileName = "Popup",
                     Children = new List<FileItemModel>
                     {
                         new() {
                             FileName = "Forms",
                             Children = new List<FileItemModel>
                             {
-                                new FileItemModel { FileName = "SupermarketInventoryByStallsReportIndex.ts" }
+                                new() { FileName = "SupermarketInventoryByStallsReportIndex.ts" }
                             }
                         },
-                        new() {
-                            FileName = "Models",
-                            Children = new List<FileItemModel>
-                            {
-                                new FileItemModel { FileName = "SupermarketInventoryByStallsReportModel.ts" },
-                                new FileItemModel { FileName = "SupermarketInventoryByStallsReportSearchModel.ts" },
-                                new FileItemModel { FileName = "GenCodeTsFileResponse.ts" },
-                                new FileItemModel { FileName = "SupermarketInventoryByStallsReportService" }
-                            }
-                        },
-                        new() {
-                            FileName = "Views",
-                            Children = new List<FileItemModel>
-                            {
-                                new FileItemModel { FileName = "Forms", Children = new List<FileItemModel> { new FileItemModel { FileName = "index.cshtml" } } }
-                            }
-                        },
-                        new() {
-                            FileName = "Language Key",
-                            Children = new List<FileItemModel>
-                            {
-                                new FileItemModel { FileName = "LanguageKey.ts" },
-                                new FileItemModel { FileName = "ListLanguageKey" }
-                            }
-                        }
                     }
                 }
             };

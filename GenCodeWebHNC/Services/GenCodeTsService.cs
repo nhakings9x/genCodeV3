@@ -1,4 +1,5 @@
 ﻿using GenCodeWebHNC.Common;
+using GenCodeWebHNC.Extensions;
 using GenCodeWebHNC.Models;
 
 namespace GenCodeWebHNC.Services

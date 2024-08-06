@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Text;
 
-namespace GenCodeWebHNC.Extension
+namespace GenCodeWebHNC.Extensions
 {
     public static class HtmlHelperExtensions
     {

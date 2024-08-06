@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using System.Text;
 
-namespace GenCodeWebHNC.Common
+namespace GenCodeWebHNC.Extensions
 {
     public static class StringExtensions
     {
@@ -310,8 +310,8 @@ namespace GenCodeWebHNC.Common
             var sb = new StringBuilder();
             sb.AppendLine("namespace My {");
             sb.AppendLine("    export namespace LanguageKey {");
-            sb.AppendLine($"        const {interfaceName} = {{");
-            sb.AppendLine($"             const Table = {{");
+            sb.AppendLine($"        export const {interfaceName} = {{");
+            sb.AppendLine($"             Table: {{");
             // Sử dụng regex để lấy các key trong interface
             var keyMatches = Regex.Matches(model, @"\s*(\w+)\s*:\s*\w+;");
             foreach (Match match in keyMatches)
@@ -320,7 +320,7 @@ namespace GenCodeWebHNC.Common
                 sb.AppendLine($"                 {key}: \"@ProjectName.{interfaceName}.Table.{key}\",");
             }
 
-            sb.AppendLine("            };");
+            sb.AppendLine("            },");
             sb.AppendLine("        };");
             sb.AppendLine("    }");
             sb.AppendLine("}");
