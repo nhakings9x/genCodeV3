@@ -39,6 +39,7 @@ namespace GenCodeWebHNC.Services
             if (fileName.EndsWith("Model")) fileName = fileName.Substring(0, fileName.Length - "Model".Length);
             indexContent = indexContent.Replace("@IndexFileExcelName", (fileName).GetDisplayName());
             indexContent = indexContent.Replace("@IndexFileName", fileName + "Index");
+            indexContent = indexContent.Replace("@IndexControllerName", fileName);
             return (indexContent, fileName + "Index");
         }
 

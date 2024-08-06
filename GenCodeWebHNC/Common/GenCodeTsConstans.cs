@@ -2,7 +2,7 @@
 {
     public class GenCodeTsConstans
     {
-        public const string BASE_INDEX_CONTENT = 
+        public const string BASE_INDEX_CONTENT =
 @"namespace My {
         export class @IndexFileName extends BaseDevExGridForm<@IndexModel, @FormModel, @OptionModel>{
             constructor(container: JQuery, formData: @FormModelContructor, options: @OptionModelContructor) {
@@ -17,7 +17,7 @@
                     @ColumnGridContent
 
                     .dataSource(option => {
-                        option.addMvc('...', '...', @LoadParams, 'POST');
+                        option.addMvc('@IndexControllerName', 'GetData', @LoadParams, 'POST');
                     })
                 );
             }

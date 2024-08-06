@@ -26,18 +26,33 @@ namespace GenCodeWebHNC.Controllers
                             {
                                 new() {
                                     FileName = "Popup.ts" ,
-                                    Content = FileMauConstants.POPUP_CONTENT
+                                    Content = FileMauConstants.Popup.POPUP_CONTENT
                                 },
-                                new() { 
+                                new() {
                                     FileName = "PopupGrid.ts" ,
-                                    Content = FileMauConstants.POPUP_GRID_CONTENT
+                                    Content = FileMauConstants.Popup.POPUP_GRID_CONTENT
                                 },
                                 new() {
                                     FileName = "PopupTabPenal.ts" ,
-                                    Content = FileMauConstants.POPUP_TAB_PENAL
+                                    Content = FileMauConstants.Popup.POPUP_TAB_PENAL
                                 }
                             }
                         },
+                    }
+                },
+                new()
+                {
+                    FileName = "C#",
+                    Children = new List<FileItemModel>
+                    {
+                        new() {
+                                    FileName = "Controller.cs" ,
+                                    Content = FileMauConstants.CSharp.CONTROLLER_CONTENT
+                                },
+                        new() {
+                                    FileName = "Service.cs" ,
+                                    Content = FileMauConstants.CSharp.SERVICE_CONTENT
+                                },
                     }
                 }
             };

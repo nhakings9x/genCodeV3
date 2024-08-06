@@ -26,6 +26,10 @@
 </div>
 
 <script>
+    $(document).ready(() => {
+        activeFileResFirst()
+    })
+
     $(document).on("dblclick", ".tree .file", function () {
         // Lấy phần tử được nhấp đúp
         const clickedFile = this;
